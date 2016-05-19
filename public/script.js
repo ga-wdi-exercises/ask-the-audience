@@ -8,7 +8,8 @@
   ])
   .config(Router)
   .factory("Question", QuestionFactory)
-  .controller("Index", IndexCtrl);
+  .controller("Index", IndexCtrl)
+  .controller("Show", ShowCtrl);
   
   Router.$inject = ["$stateProvider", "$locationProvider"];
   function Router($stateProvider, $locationProvider){
@@ -21,14 +22,16 @@
       controllerAs: "IndexVM"
     })
     .state("show",  {
-      url:          "/:title",
-      templateUrl:  "/assets/html/questions-show.html"
+      url:          "/:_id",
+      templateUrl:  "/assets/html/questions-show.html",
+      controller:   "Show",
+      controllerAs: "ShowVM"
     });
   }
   
   QuestionFactory.$inject = ["$resource"];
   function QuestionFactory($resource){
-    var Question = $resource("/api/questions/:title");
+    var Question = $resource("/api/questions/:_id");
     return Question;
   }
   
@@ -42,4 +45,11 @@
       });
     }
   }
+  
+  ShowCtrl.$inject = ["Question", "$stateParams"];
+  function ShowCtrl(Question, $stateParams){
+    var vm        = this;
+    vm.question   = Question.get($stateParams);
+  }
+  
 })();

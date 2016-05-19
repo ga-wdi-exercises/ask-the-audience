@@ -22,6 +22,12 @@ app.get("/api/questions", function(req, res){
   });
 });
 
+app.get("/api/questions/:_id", function(req, res){
+  Question.findOne(req.params).then(function(question){
+    res.json(question);
+  });
+});
+
 app.post("/api/questions", function(req, res){
   Question.create(req.body).then(function(question){
     res.json(question);

@@ -1,1 +1,6 @@
-<h1>This is not the Index; it's a show page!</h1>
+<h2>{{ShowVM.question.text}}</h2>
+<ul class="answers">
+  <li data-ng-repeat="answer in ShowVM.question.answers">
+    {{answer.text}}
+  </li>
+</ul>
