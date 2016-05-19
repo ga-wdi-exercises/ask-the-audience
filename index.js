@@ -29,6 +29,7 @@ app.get("/api/questions/:_id", function(req, res){
 });
 
 app.put("/api/questions/:_id", function(req, res){
+  console.log(req.body)
   Question.findOneAndUpdate(req.params, req.body, {new: true}).then(function(question){
     res.json(question);
   });

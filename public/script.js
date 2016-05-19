@@ -48,14 +48,18 @@
     }
   }
   
-  ShowCtrl.$inject = ["Question", "$stateParams"];
-  function ShowCtrl(Question, $stateParams){
+  ShowCtrl.$inject = ["Question", "$stateParams", "$state"];
+  function ShowCtrl(Question, $stateParams, $state){
     var vm        = this;
     vm.question   = Question.get($stateParams);
     vm.update     = function(){
       Question.update($stateParams, vm.question, function(response){
-        console.log(response);
+        $state.reload();
       });
+    }
+    vm.createAnswer = function(){
+      vm.question.answers.push(vm.answer);
+      vm.update();
     }
   }
   
