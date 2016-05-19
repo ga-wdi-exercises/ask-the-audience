@@ -1,7 +1,7 @@
-<ul>
+<ul class="questions">
   <li data-ng-repeat="question in IndexVM.questions">
     <h2>{{question.text}}</h2>
-    <ul>
+    <ul class="answers">
       <li data-ng-repeat="answer in question.answers">
         {{answer.text}}
       </li>
