@@ -31,7 +31,9 @@
   
   QuestionFactory.$inject = ["$resource"];
   function QuestionFactory($resource){
-    var Question = $resource("/api/questions/:_id");
+    var Question = $resource("/api/questions/:_id", {}, {
+      update: {method: "PUT"}
+    });
     return Question;
   }
   
@@ -50,6 +52,11 @@
   function ShowCtrl(Question, $stateParams){
     var vm        = this;
     vm.question   = Question.get($stateParams);
+    vm.update     = function(){
+      Question.update($stateParams, vm.question, function(response){
+        console.log(response);
+      });
+    }
   }
   
 })();

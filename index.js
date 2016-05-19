@@ -28,6 +28,12 @@ app.get("/api/questions/:_id", function(req, res){
   });
 });
 
+app.put("/api/questions/:_id", function(req, res){
+  Question.findOneAndUpdate(req.params, req.body, {new: true}).then(function(question){
+    res.json(question);
+  });
+});
+
 app.post("/api/questions", function(req, res){
   Question.create(req.body).then(function(question){
     res.json(question);
