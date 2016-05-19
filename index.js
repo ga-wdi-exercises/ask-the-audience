@@ -16,10 +16,6 @@ app.engine(".hbs", hbs({
   defaultLayout:"layout-main"
 }));
 
-app.get("/", function(req, res){
-  res.render("main", {layout: false});
-});
-
 app.get("/api/questions", function(req, res){
   Question.find().then(function(questions){
     res.json(questions);
@@ -30,6 +26,10 @@ app.post("/api/questions", function(req, res){
   Question.create(req.body).then(function(question){
     res.json(question);
   });
+});
+
+app.get("/*", function(req, res){
+  res.render("main", {layout: false});
 });
 
 app.listen(3001, function(){
